@@ -8,11 +8,12 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+
     <Button
         android:id="@+id/showFullScreenIntentButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_full_screen_intent_button"
+        android:text="Click here to send normal push notification to tray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="wrap"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,26 +22,19 @@
 
 
 
-
     <Button
         android:id="@+id/showFullScreenIntentWithDelayButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_scheduled_full_screen_intent"
+        android:text="Click her to send urgent push
+notification with sound that
+pops up on the lock screen or
+on top of everything – like a
+phone call would"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="wrap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/showFullScreenIntentButton"
         app:layout_constraintWidth_min="wrap" />
 
-    <Button
-        android:id="@+id/showFullScreenIntentLockScreenWithDelayButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/show_scheduled_full_screen_intent_lock_screen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_min="wrap"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showFullScreenIntentWithDelayButton"
-        app:layout_constraintWidth_min="wrap" />
 </LinearLayout>

@@ -34,39 +34,42 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 public class NotificationUtils {
-    private static final String CHANNEL_ID = "channelId";
+    private static String getChannelId(boolean isReg){
+       return isReg?"regular-notification":"urgent-notification";
+    }
 
-    public static void showNotificationWithFullScreenIntent(Context context, boolean isLockScreen) {
+    public static void showNotificationWithFullScreenIntent(Context context,  boolean isRegularNotification) {
         String title = "Title";
         String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, getChannelId(isRegularNotification))
             .setSmallIcon(android.R.drawable.arrow_up_float)
             .setContentTitle(title)
             .setContentText(description)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setFullScreenIntent(getFullScreenIntent(context, isLockScreen), true);
+            .setPriority(isRegularNotification?NotificationCompat.PRIORITY_DEFAULT:NotificationCompat.PRIORITY_HIGH);
+             // open screen when notifications is clicked
+            builder.setFullScreenIntent(getFullScreenIntent(context), true);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager != null) {
-            buildChannel(notificationManager);
+            buildChannel(notificationManager,isRegularNotification);
             notificationManager.notify(0, builder.build());
         }
     }
 
-    private static void buildChannel(NotificationManager notificationManager) {
+    private static void buildChannel(NotificationManager notificationManager, boolean isRegularNotification) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Example Notification Channel";
             String description = "This is used to demonstrate the Full Screen Intent";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            int importance =isRegularNotification? NotificationManager.IMPORTANCE_DEFAULT:NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(getChannelId(isRegularNotification), name, importance);
             channel.setDescription(description);
             notificationManager.createNotificationChannel(channel);
         }
     }
 
-    private static PendingIntent getFullScreenIntent(Context context, boolean isLockScreen) {
-        Class<?> destination = isLockScreen ? LockScreenActivity.class : FullScreenActivity.class;
+    private static PendingIntent getFullScreenIntent(Context context ) {
+        Class<?> destination = FullScreenActivity.class;
         Intent intent = new Intent(context, destination);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 

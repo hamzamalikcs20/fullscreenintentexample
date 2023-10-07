@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         showFullScreenIntentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotificationUtils.showNotificationWithFullScreenIntent(getApplicationContext(),false);
+                NotificationUtils.showNotificationWithFullScreenIntent(getApplicationContext(),true);
             }
         });
 
@@ -23,15 +23,7 @@ public class MainActivity extends AppCompatActivity {
         showFullScreenIntentWithDelayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotificationScheduler. scheduleNotification(getApplicationContext(),false);
-            }
-        });
-
-        Button showFullScreenIntentLockScreenWithDelayButton = findViewById(R.id.showFullScreenIntentLockScreenWithDelayButton);
-        showFullScreenIntentLockScreenWithDelayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NotificationScheduler.scheduleNotification(getApplicationContext(),true);
+                NotificationScheduler. scheduleNotification(getApplicationContext());
             }
         });
     }

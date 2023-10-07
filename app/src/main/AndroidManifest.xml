@@ -22,8 +22,6 @@
 
         <activity android:name=".FullScreenActivity" />
 
-        <activity android:name=".LockScreenActivity"
-            android:showOnLockScreen="true"/>
 
         <receiver
             android:name=".NotificationReceiver"

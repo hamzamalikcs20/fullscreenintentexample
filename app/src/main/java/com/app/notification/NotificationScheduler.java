@@ -10,27 +10,25 @@ import java.util.Calendar;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class NotificationScheduler {
-    private static final long SCHEDULE_TIME = 5L;
+    private static final long SCHEDULE_TIME = 30L;
 
-    public static void scheduleNotification(Context context, boolean isLockScreen) {
+    public static void scheduleNotification(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
             long timeInMillis = System.currentTimeMillis() + SECONDS.toMillis(SCHEDULE_TIME);
 
-            PendingIntent pendingIntent = getReceiver(context, isLockScreen);
+            PendingIntent pendingIntent = getReceiver(context);
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
-            } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
             } else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent);
             }
         }
     }
 
-    private static PendingIntent getReceiver(Context context, boolean isLockScreen) {
-        Intent intent = NotificationReceiver.build(context, isLockScreen);
+    private static PendingIntent getReceiver(Context context ) {
+        Intent intent = NotificationReceiver.build(context);
         // for demo purposes no request code and no flags
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
