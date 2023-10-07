@@ -1,4 +1,4 @@
-package com.giorgosneokleous.fullscreenintentexample;
+package com.app.notification;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

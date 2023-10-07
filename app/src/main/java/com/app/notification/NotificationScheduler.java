@@ -1,16 +1,14 @@
-package com.giorgosneokleous.fullscreenintentexample;
+package com.app.notification;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import java.util.Calendar;
-
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class NotificationScheduler {
-    private static final long SCHEDULE_TIME = 30L;
+    private static final long SCHEDULE_TIME = 5L;
 
     public static void scheduleNotification(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -29,6 +27,15 @@ public class NotificationScheduler {
 
     private static PendingIntent getReceiver(Context context ) {
         Intent intent = NotificationReceiver.build(context);
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+//            return PendingIntent.getBroadcast
+//                    (context, 0, intent, PendingIntent.FLAG_MUTABLE);
+//        }
+//        else
+//        {
+//            return PendingIntent.getBroadcast
+//                    (context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+//        }
         // for demo purposes no request code and no flags
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }

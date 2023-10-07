@@ -1,4 +1,4 @@
-package com.giorgosneokleous.fullscreenintentexample;
+package com.app.notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,6 +8,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // todo
         NotificationUtils.showNotificationWithFullScreenIntent(context, false);
     }
 

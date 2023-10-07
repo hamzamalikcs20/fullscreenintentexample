@@ -5,14 +5,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:layout_gravity="clip_horizontal"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Add the text for your notification here"
+        android:inputType="textMultiLine" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="Notification will delay 30 seconds
+giving you time to close the app,
+lock your phone or whatever you
+want to do." />
 
     <Button
         android:id="@+id/showFullScreenIntentButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Click here to send normal push notification to tray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="wrap"
@@ -21,11 +45,11 @@
         app:layout_constraintWidth_min="wrap" />
 
 
-
     <Button
         android:id="@+id/showFullScreenIntentWithDelayButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Click her to send urgent push
 notification with sound that
 pops up on the lock screen or
