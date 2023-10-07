@@ -30,7 +30,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 
@@ -41,10 +40,7 @@ public class NotificationUtils {
        return isReg?"regular-notification":"urgent-notification";
     }
 
-    public static void showNotificationWithFullScreenIntent(Context context, boolean isRegularNotification) {
-        String title = "Title";
-        String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-
+    public static void showNotificationWithFullScreenIntent(Context context, String title, String description, boolean isRegularNotification) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, getChannelId(isRegularNotification))
             .setSmallIcon(android.R.drawable.arrow_up_float)
             .setContentTitle(title)
@@ -86,16 +82,16 @@ public class NotificationUtils {
         Class<?> destination = FullScreenActivity.class;
         Intent intent = new Intent(context, destination);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-//            return PendingIntent.getActivity
-//                    (context, 0, intent, PendingIntent.FLAG_MUTABLE);
-//        }
-//        else
-//        {
-//            return PendingIntent.getActivity
-//                    (context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-//        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            return PendingIntent.getActivity
+                    (context, 0, intent, PendingIntent.FLAG_MUTABLE);
+        }
+        else
+        {
+            return PendingIntent.getActivity
+                    (context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        }
         // Flags and request code are 0 for the purpose of demonstration
-        return PendingIntent.getActivity(context, 0, intent, 0);
+//        return PendingIntent.getActivity(context, 0, intent, 0);
     }
 }
